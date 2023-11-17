@@ -1,0 +1,18 @@
+# Node.js
+node_modules/
+
+# Arquivos de build
+build/
+dist/
+*.log
+npm-debug.log*
+
+# Arquivos de ambiente
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Dependências específicas do sistema operacional
+.DS_Store
+Thumbs.db
