@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 function Header() {
     return (
         <React.Fragment>
-            <div class="block sm:block md:hidden lg:hidden xl:hidden">
+            <div className="block sm:block md:hidden lg:hidden xl:hidden">
                 <div className=" h-[70px] bg-default-900 ">
                     <div className="flex flex-row justify-center items-center h-full">
                         <div className=" w-[85%]">
@@ -35,7 +35,7 @@ function Header() {
                 </div>
             </div>
 
-            <div class="hidden sm:hidden md:block lg:block xl:block ">
+            <div className="hidden sm:hidden md:block lg:block xl:block ">
                 <div className=" h-[140px] bg-default-900  shadow-bottom ">
                     <div className="h-[50px] bg-default-800">
                         <div className="h-full mx-auto container">
