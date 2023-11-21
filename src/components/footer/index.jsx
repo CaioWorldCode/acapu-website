@@ -6,6 +6,7 @@ import { IoMail } from 'react-icons/io5'
 import FooterBg from './../../assets/images/footer-bg-info.jpg'
 import Logo from './../../assets/images/brand-logo-white.png'
 import FooterBackground from './../../assets/images/bg.png'
+import { Link } from 'react-router-dom'
 
 function Footer() {
     return (
@@ -201,13 +202,19 @@ function Footer() {
                         <div className="h-full flex justify-center items-center max-xl:flex-col">
                             <div className="w-[50%] max-xl:w-[100%]">
                                 <div className="flex gap-5 max-xl:justify-center">
-                                    <div className="text-white font-light font-poppins cursor-pointer transition-all hover:text-main-500">
+                                    <Link
+                                        to="/privacidade"
+                                        className="text-white font-light font-poppins cursor-pointer transition-all hover:text-main-500"
+                                    >
                                         Políticas de privacidade
-                                    </div>
+                                    </Link>
                                     <div className="text-default-400">|</div>
-                                    <div className="text-white font-light font-poppins cursor-pointer transition-all hover:text-main-500">
+                                    <Link
+                                        to={'/cookies'}
+                                        className="text-white font-light font-poppins cursor-pointer transition-all hover:text-main-500"
+                                    >
                                         Políticas de cookies
-                                    </div>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="font-poppins w-[50%] max-xl:w-[100%] flex justify-end max-xl:justify-center items-center text-white font-extralight">
