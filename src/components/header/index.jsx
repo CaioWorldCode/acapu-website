@@ -1,36 +1,126 @@
-import { FaLinkedinIn, FaFacebook, FaInstagram } from 'react-icons/fa'
+import React, { useState } from 'react'
+import { FaLinkedinIn, FaFacebook, FaInstagram,  FaInfoCircle} from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
 import { BsEnvelope, BsTelephone, BsClock } from 'react-icons/bs'
-import { TiThMenuOutline } from 'react-icons/ti'
+import { GoHomeFill } from "react-icons/go";
+import { CgMenu } from "react-icons/cg";
+import { Link } from 'react-router-dom'
+import { MdMiscellaneousServices, MdSecurity } from "react-icons/md";
+import { IoMdApps, IoMdContact } from "react-icons/io";
 
 import Logo from './../../assets/images/brand-logo-white.png'
 import LogoBlack from './../../assets/images/brand-logo-black.png'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Drawer } from '@material-tailwind/react';
+
 
 function Header() {
+    const [open, setOpen] = useState(false);
+    
+    const openDrawer = () => {
+        setOpen(open ? false : true)
+    }
+    const closeDrawer = () => setOpen(false);
+
+    const menu = [
+        {
+            name: "Home",
+            slug: "home",
+            icon:  <GoHomeFill />,
+            route: "/",
+        },
+        {
+            name: "Sobre",
+            slug: "about",
+            icon:  <FaInfoCircle />,
+            route: "/sobre",
+        },
+        {
+            name: "Serviços",
+            slug: "services",
+            icon:  <MdMiscellaneousServices />,
+            route: "/servicos",
+        },
+        {
+            name: "Contato",
+            slug: "contact",
+            icon:  <IoMdContact />,
+            route: "/contato",
+        },
+        {
+            name: "Privacidade",
+            slug: "privacy",
+            icon:  <MdSecurity />,
+            route: "/privacidade",
+        },
+    ]
+
     return (
         <React.Fragment>
-            <div className="block sm:block md:hidden lg:hidden xl:hidden">
-                <div className=" h-[70px] bg-default-900 ">
+            <Drawer open={open} onClose={closeDrawer} className="bg-default-900 z-[1000] w-[100vw] shadow-2xl"> 
+                <div className="mb-3 flex items-center justify-center w-full p-4">
+                    <div className="flex justify-center items-center h-full flex-row gap-2">
+                        <img src={Logo} alt="" className="object-contain w-[80px]" />
+                        <div className="text-white font-bold uppercase text-2xl mt-2">
+                            ACAPU
+                        </div>
+                    </div>
+                </div>
+
+                <div className='p-2 flex flex-col gap-2'>
+                    {menu.map((row, index) => {
+                        return(
+                            <div key={index}>
+                                <Link to={row.route} className={`border-2 h-[40px] rounded flex items-center font-poppins ${location.pathname === row.route ? 'text-main-500 border-main-500' : 'text-white border-default-800'}`}>
+                                    <div className='ml-2'>{row.icon}</div>
+                                    <div className='ml-2'>{row.name}</div>
+                                </Link>
+                            </div>
+                        )
+                    })}
+
+                    <div className='bg-main-500 p-2 rounded font-poppins text-sm font-normal flex gap-2 items-center mt-5 mb-5'>
+                        <IoMdApps className='text-[20px]'/>
+                        Acesso cliente
+                    </div>
+
+                    <div className='rounded bg-default-800 p-2'>
+                        <div className="mt-1 transition-all cursor-pointer text-default-base hover:text-main-600 flex flex-row gap-2 justify-start items-center text-sm">
+                            <BsEnvelope className="text-main-400 text-sm" />
+                            contato@acapu.com.br
+                        </div>
+
+                        <div className="mt-1 transition-all cursor-pointer text-default-base hover:text-main-600 flex flex-row gap-2 justify-start items-center text-sm">
+                            <BsTelephone className="text-main-400 text-sm" />
+                            +55 11 0000-0000
+                        </div>
+
+                        <div className="mt-1 transition-all cursor-pointer text-default-base hover:text-main-600 flex flex-row gap-2 justify-start items-center text-sm">
+                            <BsClock className="text-main-400 text-sm" />
+                            Atendimento das 09h às 18h
+                        </div>
+                    </div>
+
+                    <div className='text-center text-[12px] text-default-600 font-poppins'>
+                        © 2023 Acapu. <br /> Todos os direitos reservados.
+                    </div>
+                </div>
+            </Drawer>
+            
+            <div className="block sm:block md:hidden lg:hidden xl:hidden pb-[70px]">
+                <div className="fixed z-50 w-full shadow-2xl h-[70px] bg-default-900 ">
                     <div className="flex flex-row justify-center items-center h-full">
+                    <div className=" w-[15%] flex justify-center items-center ">
+                            <CgMenu className="text-white text-[35px]" onClick={() => openDrawer()}/>
+                        </div>
                         <div className=" w-[85%]">
-                            <div className=" flex flex-row gap-3 justify-start items-center p-2">
+                            <div className=" flex flex-row gap-3 justify-center items-center p-2 ">
                                 <img
                                     src={Logo}
                                     alt=""
-                                    className="object-contain w-[50px]"
+                                    className="object-contain w-[50px] ml-[-16%]"
                                 />
-
-                                <div className="text-white font-poppins font-bold text-2xl mt-3">
-                                    ACAPU
-                                </div>
                             </div>
-                        </div>
-
-                        <div className=" w-[15%] flex justify-center items-center ">
-                            <TiThMenuOutline className="text-white text-[35px]" />
-                        </div>
+                        </div>                      
                     </div>
                 </div>
             </div>
@@ -115,36 +205,18 @@ function Header() {
                                     </div>
                                 </div>
                                 {/* MENU */}
-                                <Link
-                                    to={'/'}
-                                    className="cursor-pointer transition-all hover:text-main-500 uppercase text-white font-poppins font-bold p-2 max-lg:text-sm"
-                                >
-                                    Home
-                                </Link>
-                                <Link
-                                    to={'/sobre'}
-                                    className="cursor-pointer transition-all hover:text-main-500 uppercase text-white font-poppins font-bold p-2 max-lg:text-sm"
-                                >
-                                    Sobre
-                                </Link>
-                                <Link
-                                    to={'/servicos'}
-                                    className="cursor-pointer transition-all hover:text-main-500 uppercase text-white font-poppins font-bold p-2 max-lg:text-sm"
-                                >
-                                    Serviços
-                                </Link>
-                                <Link
-                                    to={'/contato'}
-                                    className="cursor-pointer transition-all hover:text-main-500 uppercase text-white font-poppins font-bold p-2 max-lg:text-sm"
-                                >
-                                    Contato
-                                </Link>
-                                <Link
-                                    to={'/privacidade'}
-                                    className="cursor-pointer transition-all hover:text-main-500 uppercase text-white font-poppins font-bold p-2 max-lg:text-sm"
-                                >
-                                    Privacidade
-                                </Link>
+                                {menu.map((row, index) => {
+                                    return(
+                                        <Link
+                                            key={index}
+                                            to={row.route}
+                                            className={`cursor-pointer transition-all hover:text-main-500 uppercase font-poppins font-bold p-2 max-lg:text-sm ${location.pathname === row.route ? 'text-main-500' : 'text-white'}`}
+                                        >
+                                            {row.name} 
+                                        </Link>
+                                    )
+                                })}
+
                                 <Link
                                     to={'/portal'}
                                     className="max-lg:text-xs  uppercase text-black font-poppins font-medium p-3 bg-main-500 rounded-lg text-sm transition-all cursor-pointer hover:bg-main-600"
